@@ -11,10 +11,15 @@ class MainController extends Controller
         return view('about');
     }
     function array(): View{
-        $array=array();
-        $array=[];
-        $array[]='Juan';
-        $array=['Juan', 'Pepe', 'María'];
+        $array1=array();
+        $array2=[];
+        $array2=['Juan'];
+        $array2=['Pepe'];
+        $array2[10]='Elizabeth';
+        $array2[]='Paco';
+        $array3=['Juan', 'Pepe', 'María'];
+        $grupo = 'Segundo de desarrollo de aplicaciones web a';
+        return view('array', 'grupo' -> $grupo, 'alumnos' -> $alumnos);
     }
     function index(): View{
         return view('index');
