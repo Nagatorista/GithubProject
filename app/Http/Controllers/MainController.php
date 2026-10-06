@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MainController extends Controller
 {
-    function about(){
-        return view('<template.about');
+    function about(): View{
+        return view('about');
     }
-    function index(){
-        return view('template.base');
+    function array(): View{
+        $array=array();
+        $array=[];
+        $array[]='Juan';
+        $array=['Juan', 'Pepe', 'María'];
+    }
+    function index(): View{
+        return view('index');
+    }
+    function portfolio(): View{
+        return view('portfolio');
     }
 }
