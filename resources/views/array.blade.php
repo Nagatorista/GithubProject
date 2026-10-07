@@ -23,6 +23,7 @@
                         @endif
                         <br>{{$alumno['nombre']}}
                     </div>
+                </div>
                 @endforeach
             </div>
         </div>
