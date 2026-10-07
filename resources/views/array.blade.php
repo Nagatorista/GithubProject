@@ -16,8 +16,12 @@
             <div class="row justify-content-center">
                 @foreach ($alumnos as alumno)
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="..." />
-                        <br>{{$alumno}}
+                        @if( $alumno['nombre'] < 20)
+                            <img class="img-fluid" src="{{ asset (assets/img/portfolio/cabin.png) }}" alt="..." />
+                        @else
+                            <img class="img-fluid" src="{{ asset (assets/img/portfolio/safe.png) }}" alt="..." />
+                        @endif
+                        <br>{{$alumno['nombre']}}
                     </div>
                 @endforeach
             </div>

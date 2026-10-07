@@ -35,7 +35,7 @@ class MainController extends Controller
             'Vilar Martín, Blas',
             'Villegas Rivera, Luis'];
         $grupo = 'Segundo de desarrollo de aplicaciones web a';
-        return view('array', ['grupo' => $grupo, 'alumnos' => $alumnos]);
+        return view('array', ['grupo' => $grupo, 'alumnos' => $alumnos, 'profesor' => 'Carmelo']);
     }
     function index(): View{
         return view('index');
