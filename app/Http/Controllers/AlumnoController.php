@@ -26,17 +26,26 @@ class AlumnoController extends Controller
     }
         
     public function index(): View{
-        return view('index', []);
+        ///
+        //$alumnos="select * from alumno";
+        $alumnos=Alumno::all();
+        //dd($alumnos);
+        return view('index', ["alumnos"=>$alumnos]);
     }
 
     public function show(Alumno $alumno): View{
         return view('index', []);
     }
-
+/*
     public function store(Request $request): RedirectResponse{
         return redirect()->route('index');
     }
-
+*/  
+    function store(Request $request) {
+        $alumno=new Alumno($request->all());
+        $alumno->save();
+        echo "Parece que todo ha ido bien";
+    }
     public function update(Request $request, Alumno $alumno): RedirectResponse{
         return redirect()->route('index');
     }
