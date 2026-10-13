@@ -12,7 +12,7 @@ class AlumnoController extends Controller
 
     public function create(): View{
         ///
-        return view('index', []);
+        return view('alumno.create', []);
     }
 
     public function destroy(Alumno $alumno): RedirectResponse{
