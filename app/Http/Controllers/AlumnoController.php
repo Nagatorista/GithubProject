@@ -22,7 +22,7 @@ class AlumnoController extends Controller
 
     public function edit(Alumno $alumno): View{
         ///
-        return view('index', []);
+        return view('alumno.index', []);
     }
         
     public function index(): View{
@@ -30,11 +30,12 @@ class AlumnoController extends Controller
         //$alumnos="select * from alumno";
         $alumnos=Alumno::all();
         //dd($alumnos);
-        return view('index', ["alumnos"=>$alumnos]);
+        return view('alumno.index', ['alumnos'=>$alumnos]);
     }
 
     public function show(Alumno $alumno): View{
-        return view('index', []);
+        dd($alumno);
+        return view('alumno.show', ['alumno'=>$alumno]);
     }
 /*
     public function store(Request $request): RedirectResponse{
