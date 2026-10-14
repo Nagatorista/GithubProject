@@ -9,45 +9,54 @@ use Illuminate\View\View;
 
 class AlumnoController extends Controller
 {
-
-    public function create(): View{
-        ///
+    public function create(): View {
+        //
         return view('alumno.create', []);
     }
-
-    public function destroy(Alumno $alumno): RedirectResponse{
-        ///
+    
+    public function destroy(Alumno $alumno): RedirectResponse {
+        //
         return redirect()->route('index');
-    }
-
-    public function edit(Alumno $alumno): View{
-        ///
-        return view('alumno.index', []);
     }
         
-    public function index(): View{
-        ///
-        //$alumnos="select * from alumno";
-        $alumnos=Alumno::all();
-        //dd($alumnos);
-        return view('alumno.index', ['alumnos'=>$alumnos]);
+    public function edit(Alumno $alumno): View {
+        //
+        return view('alumno.edit', []);
     }
 
-    public function show(Alumno $alumno): View{
-        dd($alumno);
-        return view('alumno.show', ['alumno'=>$alumno]);
+    public function index(): View {
+        //
+        //$alumnos = 'select * from alumno';
+        $alumnos = Alumno::all();
+        //dd($alumnos);
+        return view('alumno.index', ['alumnos' => $alumnos]);
     }
-/*
-    public function store(Request $request): RedirectResponse{
+        
+    public function show(Alumno $alumno): View {
+        //dd($alumno);
+        return view('alumno.show', ['alumno' => $alumno]);
+    }
+        
+    /*public function store(Request $request): RedirectResponse {
+        //
         return redirect()->route('index');
-    }
-*/  
+    }*/
     function store(Request $request) {
-        $alumno=new Alumno($request->all());
+        //dd($request->all());
+        //protected $fillable = ['nombre', 'apellidos', 'fnac', 'genero', 'nacceso'];
+        $alumno = new Alumno($request->all());
+        /*$alumno->nombre = $request->nombre;
+        $alumno->apellidos = $request->apellidos;
+        $alumno->genero = $request->genero;
+        $alumno->fnac = $request->fnac;
+        $alumno->nacceso = $request->nacceso;*/
         $alumno->save();
-        echo "Parece que todo ha ido bien";
+        //dd($alumno);
+        echo 'parece que todo ha ido bien.';
     }
-    public function update(Request $request, Alumno $alumno): RedirectResponse{
+
+    public function update(Request $request, Alumno $alumno): RedirectResponse {
+        //
         return redirect()->route('index');
     }
 
