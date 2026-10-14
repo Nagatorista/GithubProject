@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('alumno', function (Blueprint $table) {
             $table->id();
             //nombre
-            $table->string('nombre',100);
+            $table->string('nombre', 100);
             //apellidos
-            $table->string('apellidos',130);
-            //fecha de nacimiento
+            $table->string('apellidos', 130);
+            //fecha nacimiento
             $table->date('fnac')->nullable();
             //genero
-            $table->enum('genero', ['m', 'f', 'o'])->nullable();
+            $table->enum('genero', ['masculino', 'femenino', 'otro'])->nullable();
             //nota acceso
             $table->decimal('nacceso', 4, 2)->nullable();
             $table->timestamps();
