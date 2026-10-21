@@ -41,9 +41,30 @@
             </div>
         </nav>
         <!-- Masthead-->
-         @yield('before-content')
+         
         <header class="masthead bg-primary text-white text-center">
+            @session('success')
+                <div class="row">
+                    <div class="col-md-4 mx-auto">
+                        <div class="alert alert-info" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                </div>
+            @endsession
+            @error('error')
+                <div class="row">
+                    <div class="col-md-4 mx-auto">
+                        <div class="alert alert-danger" role="alert">
+                            {{$message}}
+                        </div>
+                    </div>
+                </div>
+            @enderror
+            @yield('before-content')
             @yield('content')
+            @yield('content-before')
+            @yield('after-content')
             <!-- directiva de blade (@WORD) que crea un referencia que cuando herede puedo rellenar -->
         </header>
         <!-- Portfolio Section-->
