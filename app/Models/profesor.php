@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class profesor extends Model
 {
-    //
+    protected $table = 'profesor';
+
+    protected $fillable = [
+        'nombre',
+        'apellidos',
+        'especialidad',
+        'falta',
+        'salario',
+    ];
 }
