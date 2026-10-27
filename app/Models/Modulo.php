@@ -14,6 +14,10 @@ class Modulo extends Model
         'horas',
         'creditos',
     ];
+
+    public function matriculas(): HasMany{
+        return $this->hasMany(Matricula::class);
+    }
 }
 namespace App\Http\Controllers;
 

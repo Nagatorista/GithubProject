@@ -32,3 +32,4 @@ Route::get('alumno/{alumno}', [AlumnoController::class, 'show'])->name('alumno.s
 Route::delete('alumno/{alumno}', [AlumnoController::class, 'destroy'])->name('alumno.destroy');*/
 Route::resource('alumno', AlumnoController::class);
 Route::resource('modulo', AlumnoController::class);
+Route::resource('matricula', MatriculaController::class);
