@@ -45,6 +45,6 @@ class ProfesorController extends Controller
     public function destroy(Profesor $profesor): RedirectResponse
     {
         $profesor->delete();
-        return redirect()->route('profesor.index');
+        return redirect()->route('profesor.index')->with('success', 'El profesor ha sido eliminado correctamente.');
     }
 }
