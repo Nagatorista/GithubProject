@@ -6,11 +6,26 @@ use App\Models\Alumno;
 use App\Models\Matricula;
 use App\Models\Modulo;
 use Carbon\Carbon;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MatriculaController extends Controller
 {
+
+    private const MESSAGES = [
+        'alumno_id.required' => 'El alumno es obligatorio.',
+        'alumno_id.numeric' => 'El alumno no se ha seleccionado bien.',
+        'alumno.exists' => 'El alumno no existe.',
+        'modulo_id.required' => 'El módulo es obligatorio.',
+        'modulo_id.numeric' => 'El modulo no se ha seleccionado bien.',
+        'modulo.exists' => 'El modulo no existe.',
+    ];
+
+    private const RULES = [
+        'alumno_id' => 'required|numeric|exists:alumno,id',
+        'modulo_id' => 'required|numeric|exists:modulo,id'
+    ];
 
     private function getCurso(): int
     {
@@ -52,7 +67,7 @@ class MatriculaController extends Controller
     public function create(): View
     {
         return view('matricula.create', [
-            'alumnos'=>Alumno::orderBy('apellidos')->orderBy('nombre')->get(),
+            'alumnos' => Alumno::orderBy('apellidos')->orderBy('nombre')->get(),
             'curso_escolar' => $this->getCursoEscolar(),
             'modulos' => modulo::all(),
         ]);
@@ -63,7 +78,20 @@ class MatriculaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), self::RULES, self::MESSAGES);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
+        $matricula = new Matricula(request->all());
+        $matricula->curso = $this->getCurso();
+        try {
+            $matricula->save();
+            return redirect()->route('matricula.create')->with(['success' => 'Se ha matriculado correctamente']);
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors([
+                'error' => 'Error al matricular'
+            ]);
+        }
     }
 
     /**
