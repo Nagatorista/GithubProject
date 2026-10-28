@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Alumno extends Model
 {
-    //Este es el modelo que corresponde a la migración de alumnos
-    //El nombre del ORM de Laravel es Eloquent
+    //esto es el modelo que corresponde a la migración de Alumno
+    //el nombre del ORM de Laravel es Eloquent
 
-    protected $table='alumno';
-    protected $fillable=['bombre', 'apellidos', 'fnac', 'genero', 'nacceso'];
+    //nombre de la tabla
+    protected $table = 'alumno';
+    
+    //campos que hay que rellenar antes de guardar un objeto en la base de datos
+    protected $fillable = ['nombre', 'apellidos', 'fnac', 'genero', 'nacceso'];
 
-    public function matriculas(): HasMany{
+    public function matriculas(): HasMany {
         return $this->hasMany(Matricula::class);
     }
 }

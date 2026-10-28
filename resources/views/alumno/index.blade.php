@@ -1,16 +1,24 @@
 @extends('template.base')
 
 @section('before-content')
-<div class="container">
+<!--<div class="container">
     <div class="row">
         <div class="col-md-10 mx-auto">
             <a href="{{ route('alumno.create') }}" class="btn btn-secondary">Create</a>
         </div>
     </div>
-</div>
+</div>-->
 @endsection
 
 @section('content')
+<div class="container">
+    <h1>Alumnos</h1>
+    <a href="{{ route('alumno.create') }}" class="btn btn-secondary mb-3">Crear Alumno</a>
+    <a href="{{ route('modulo.create') }}" class="btn btn-secondary mb-3">Crear Módulo</a>
+    <a href="{{ route('alumno.index') }}" class="btn btn-secondary mb-3">Ver Alumnos</a>
+    <a href="{{ route('modulo.index') }}" class="btn btn-secondary mb-3">Ver Módulos</a>
+    <hr>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-10 mx-auto">
@@ -26,10 +34,12 @@
                         <td>
                             <a href="{{ route('alumno.show', $alumno) }}" class="btn btn-secondary">View</a>
                             <a href="{{ route('alumno.edit', $alumno) }}" class="btn btn-secondary">Edit</a>
-                            <form data-message="{{ $alumno->apellidos . ',' . $alumno->nombre }}" class="confirm-dialog" action="{{ route('alumno.destroy', $alumno) }}" method="post" style="display: inline-block;">
+                            <!--<a href="{{ route('index') }}" class="btn btn-secondary">Delete</a>-->
+                            <form data-message="{{ $alumno->apellidos . ', ' . $alumno->nombre }}" class="confirm-dialog" action="{{ route('alumno.destroy', $alumno) }}" method="post" style="display: inline;">
                                 @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-secondary">Delete</button>
+                                @method('delete')
+                                <input type="submit" value="Delete" class="btn btn-secondary">
+                                <!--<button type="submit" class="btn btn-secondary">Delete</button>-->
                             </form>
                         </td>
                     </tr>
@@ -39,16 +49,17 @@
     </div>
 </div>
 @endsection
+
 @section('script')
 <script>
-    document.querySelectorAll(form.confirm-dialog).forEach(
-        form=>{
-            form.addEventListener('submit', e=>{
+    document.querySelectorAll('form.confirm-dialog').forEach(
+        form => {
+            form.addEventListener('submit', e => {
                 const message = '¿Seguro que quieres borrar al alumno ' + form.dataset.message + '?';
-                if(!confirm(message)){
+                if(!confirm(message)) {
                     e.preventDefault();
                 }
-            })
+            });
         }
     );
 </script>

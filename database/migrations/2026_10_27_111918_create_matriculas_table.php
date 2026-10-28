@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('alumno_id');
             $table->foreignId('modulo_id');
             $table->decimal('nota', 4, 2)->nullable();
+            $table->unsignedSmallInteger('curso');
             $table->timestamps();
             $table->unique(['alumno_id', 'modulo_id', 'curso']);
             $table->foreign('alumno_id')->references('id')->on('alumno')->onDelete('cascade');
