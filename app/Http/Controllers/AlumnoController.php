@@ -116,4 +116,13 @@ class AlumnoController extends Controller
         return redirect()->route('alumno.index');
     }
 
+    public function matricular(Alumno $alumno): View {
+        $matriculas = Matricula::where('alumno_id', $alumno->id)->where('curso', $this->getCursoEscolar())->get();
+        $MatriculasSimplificadas=[];
+            foreach($matriculas as $matricula) {
+                $matriculaSimplificada = [$matricula->modulo_id]=$matricula->modulo_id;
+            }
+        $matriculas = Matricula::where('alumno_id', '-', $alumno->id)->where('curso', '-', $this->getCursoEscolar())->get();
+    }
+
 }

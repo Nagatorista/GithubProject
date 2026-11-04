@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class MatriculaController extends Controller
 {
@@ -27,19 +28,7 @@ class MatriculaController extends Controller
         'modulo_id' => 'required|numeric|exists:modulo,id'
     ];
 
-    private function getCurso(): int
-    {
-        if (Carbon::now()->month >= 9) {
-            return Carbon::now()->year;
-        } else {
-            return Carbon__::now()->year - 1;
-        }
-    }
-
-    private function getCursoEscolar(): string
-    {
-        return $this->getCurso() . '/' . $this->getCurso() + 1;
-    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -86,17 +75,30 @@ class MatriculaController extends Controller
         $matricula->curso = $this->getCurso();
         try {
             $matricula->save();
-            return redirect()->route('matricula.create')->with(['success' => 'Se ha matriculado correctamente']);
+            //return redirect()->route('matricula.create')->with(['success' => 'Se ha matriculado correctamente']);
+            return back()->with(['success' => 'Se ha matriculado correctamente']);
         } catch (\Exception $e) {
-            return back()->withInput()->withErrors([
-                'error' => 'Error al matricular'
-            ]);
+            return back()->withInput()->withErrors(['error' => 'Error al matricular']);
         }
     }
 
     /**
      * Display the specified resource.
      */
+
+    public function make(Request $request, Alumno $alumno): RedirectResponse
+    {
+        $matricula = new Matricula($request->all());
+        $matricula->curso = $this->getCurso();
+        $matricula->alumno_id = $alumno->id;
+        try {
+            $matricula->save();
+            return back()->with(['success' => 'Se ha matriculado correctamente']);
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Error al matricular']);
+        }
+    }
+
     public function show(Matricula $matricula)
     {
         //

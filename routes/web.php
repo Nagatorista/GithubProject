@@ -32,6 +32,9 @@ Route::get('alumno', [AlumnoController::class, 'index'])->name('alumno.index');
 Route::put('alumno/{alumno}', [AlumnoController::class, 'update'])->name('alumno.update');
 Route::get('alumno/{alumno}', [AlumnoController::class, 'show'])->name('alumno.show');
 Route::delete('alumno/{alumno}', [AlumnoController::class, 'destroy'])->name('alumno.destroy');*/
+Route::get('alumno/{alumno}/matricular', [AlumnoController::class, 'matricular'])->name('alumno.matricular');
 Route::resource('alumno', AlumnoController::class);
 Route::resource('modulo', ModuloController::class);
 Route::resource('matricula', MatriculaController::class);
+Route::get('matricular/{alumno}', [MatriculaController::class, 'create'])->name('matricular.create');
+Route::post('matricular/{alumno}/make', [MatriculaController::class, 'make'])->name('matricula.make');
